@@ -20,11 +20,17 @@ source fixmystreet/commonlib/shlib/deployfns
 
 read_conf fixmystreet/conf/general
 
-if [ $OPTION_BASE_URL = "http://reportemptyhomes.com" ]; then
-    DATE="2008-10-01"
-else
-    DATE="2007-02-01"
-fi
+case "$OPTION_BASE_URL" in
+    http://www.fiksgatami.no)
+	DATE="2011-03-03"
+	;;
+    http://reportemptyhomes.com)
+	DATE="2008-10-01"
+	;;
+    *)
+	DATE="2007-02-01"
+	;;
+esac
 
 SOURCEA=/tmp/bci-creation-rate-graph-data-$RANDOM$RANDOM
 SOURCEB=/tmp/bci-creation-rate-graph-data-$RANDOM$RANDOM
@@ -36,16 +42,31 @@ GPSCRIPT=/tmp/bci-creation-rate-graph-script-$RANDOM$RANDOM
 #    where status in ('draft') 
 
 function grab_data {
-    echo "select 
-        date(created), count(*)
-        from problem 
-        $1
-        group by date(created)
-        order by date(created)
-        ;" | psql --host $OPTION_BCI_DB_HOST --port $OPTION_BCI_DB_PORT -A -F " " $OPTION_BCI_DB_NAME $OPTION_BCI_DB_USER | egrep -v "date|rows" >$2
+    # Implemented in perl to avoid having to reimplement the connect
+    # logic to match the CGI scripts.
+    perl -Ifixmystreet/perllib -Ifixmystreet/commonlib/perllib \
+	-MStandard \
+	-MmySociety::Config \
+	-e "
+        use mySociety::DBHandle qw(select_all);
+        mySociety::Config::set_file('fixmystreet/conf/general');
+        mySociety::DBHandle::configure(
+            Name => mySociety::Config::get('BCI_DB_NAME'),
+            User => mySociety::Config::get('BCI_DB_USER'),
+            Password => mySociety::Config::get('BCI_DB_PASS'),
+            Host => mySociety::Config::get('BCI_DB_HOST', undef),
+            Port => mySociety::Config::get('BCI_DB_PORT', undef)
+        );
+        my \$selection = shift;
+        my \$sql = \"select date(created), count(*) from problem \$selection
+                     group by date(created) order by date(created)\";
+        my \$entries = select_all(\$sql); 
+        map { print \$_->{date}, ' ', \$_->{count}, \"\n\"} @\$entries;
+        " "$1" > $2
 }
 
-# rather nastily, work out the cumulative heights in reverse, so can plot impulses on top of each other
+# rather nastily, work out the cumulative heights in reverse, so can
+# plot impulses on top of each other
 grab_data "" $SOURCEA
 grab_data "where state not in ('unconfirmed')" $SOURCEB
 grab_data "where state not in ('unconfirmed', 'confirmed')" $SOURCEC
@@ -106,4 +127,4 @@ END
 export GDFONTPATH=/usr/share/fonts/truetype/ttf-bitstream-vera
 gnuplot < $GPSCRIPT > fixmystreet/web/bci-live-creation$EXTENSION
 
-
+rm $SOURCEA $SOURCEB $SOURCEC $SOURCED $SOURCEE $GPSCRIPT
