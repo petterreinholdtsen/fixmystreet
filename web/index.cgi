@@ -186,6 +186,7 @@ EOF
     $out .= Cobrand::front_stats(Page::get_cobrand($q), $q);
 
     $out .= <<EOF;
+<p><a href="http://wiki.nuug.no/grupper/fiksgatami/tips">Tips til deg som har mottatt en sak fra FiksGataMi.</a></p>
 </div>
 
 EOF
