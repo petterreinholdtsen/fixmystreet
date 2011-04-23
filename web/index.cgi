@@ -152,8 +152,8 @@ sub front_page {
     $out .= <<EOF;
 <p align="center" style="margin-bottom:0">
 <img width="23" height="12" alt="Nytt!" src="/i/new.png" border="0">
-2011-04-23 FiksGataMi sender nå veisaker til vegvesenet for å spare
-kommuner for jobben med å sende saker videre.
+2011-04-23 FiksGataMi sender n&aring; veisaker til vegvesenet for
+&aring; spare kommuner for jobben med &aring; sende saker videre.
 </p>
 EOF
     $out .= '<p class="error">' . $error . '</p>' if ($error);
