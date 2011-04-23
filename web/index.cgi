@@ -149,7 +149,7 @@ sub front_page {
 #EOF
     #    }
     #}
-    $out .= <<EOF
+    $out .= <<EOF;
 <p align="center" style="margin-bottom:0">
 <img width="23" height="12" alt="Nytt!" src="/i/new.png" border="0">
 2011-04-23 FiksGataMi sender nå veisaker til vegvesenet for å spare
