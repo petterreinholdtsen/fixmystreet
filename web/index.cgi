@@ -148,7 +148,7 @@ sub front_page {
 #                                        mySociety::Config::get('IPHONE_URL')},
 #                                   _("Get FixMyStreet on your iPhone"));
     #}
-    for (my $date = sort keys %news) {
+    for my $date (sort keys %news) {
         my $new = _("New!");
         my $text = $news{$date};
     $out .= <<EOF;
