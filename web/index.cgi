@@ -148,12 +148,12 @@ sub front_page {
 #                                        mySociety::Config::get('IPHONE_URL')},
 #                                   _("Get FixMyStreet on your iPhone"));
     #}
-    for my $date (sort keys %news) {
+    for my $date (sort {$b cmp $a} keys %news) {
         my $new = _("New!");
         my $text = $news{$date};
     $out .= <<EOF;
 <p align="center" style="margin-bottom:0">
-<img width="23" height="12" alt="$new" src="/i/new.png" border="0">$text</p>
+<img width="23" height="12" alt="$new" src="/i/new.png" border="0">$date $text</p>
 EOF
     }
     $out .= '<p class="error">' . $error . '</p>' if ($error);
