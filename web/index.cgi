@@ -141,7 +141,7 @@ sub front_page {
         (
          '2011-04-23' => 'FiksGataMi sender n&aring; veisaker ogs&aring; til vegvesenet slik at kommuner ikke trenger sende saker videre.',
          '2011-04-26' => $q->a({href => mySociety::Config::get('ANDROID_URL')},
-                               'Last ned FiksGataMi-app for don Android-telefon.'),
+                               'Last ned FiksGataMi-app for din Android-telefon.'),
         );
     #    if ($q->{site} eq 'fixmystreet') {
 #        $news{'2008-12-11'} = $q->a({href =>
