@@ -451,6 +451,24 @@ sub contact_counts {
     return $contacts; 
 }
 
+=item unique_emails_count COBRAND
+
+Return an the number of unique email addresses used to submit the live
+problem reports, to be used in the admin interface.
+Uses any site_restriction defined by a cobrand.
+
+=cut
+
+sub unique_emails_count {
+    my ($cobrand) = @_;
+    my $contact_restriction = Cobrand::contact_restriction($cobrand);
+    my $resultset = dbh()->selectall_arrayref(
+            "select count(*) from (select distinct email from problem " .
+            "where confirmed is not null ".
+            "and state in ('fixed', 'confirmed') $site_restriction) as t");
+    return $resultset->[0]->[0];
+}
+
 =item admin_fetch_problem ID
 
 Return an array reference of data relating to a problem, to be used in the admin interface. 

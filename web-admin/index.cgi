@@ -150,12 +150,15 @@ sub admin_summary ($) {
     $questionnaires{total} = $questionnaires{0} + $questionnaires{1};
     my $questionnaires_pc = $questionnaires{total} ? sprintf('%.1f', $questionnaires{1} / $questionnaires{total} * 100) : 'na';
     
+    my $users = Problems::unique_emails_count($cobrand);
+
     print $q->ul(
         $q->li(sprintf(_("<strong>%d</strong> live problems"), $total_problems_live)),
         $q->li(sprintf(_("%d live updates"), $comments{confirmed})),
         $q->li(sprintf(_("%d confirmed alerts, %d unconfirmed"), $alerts{1}, $alerts{0})),
         $q->li(sprintf(_("%d questionnaires sent &ndash; %d answered (%s%%)"), $questionnaires{total}, $questionnaires{1}, $questionnaires_pc)),
         $q->li(sprintf(_("%d council contacts &ndash; %d confirmed, %d unconfirmed"), $contacts{total}, $contacts{1}, $contacts{0})),
+        $q->li(sprintf(_("%d unique emails behind reports with state fixed and confirmed"), $users)),
     );
 
     if (Cobrand::admin_show_creation_graph($cobrand)) {
@@ -172,6 +175,25 @@ sub admin_summary ($) {
     print $q->ul(
         map { $q->li("$comments{$_} $_") } sort keys %comments
     );
+
+    my $query =
+        "SELECT category, COUNT(*) AS total, ".
+        "       (100 * SUM(fixed) / count(*)) AS fixedfraq ".
+        "  FROM (SELECT category, ".
+        "               CASE WHEN state = 'fixed' THEN 1 ELSE 0 END AS fixed ".
+        "        FROM problem WHERE confirmed IS NOT NULL AND ".
+        "                         state IN ('fixed', 'confirmed') AND ".
+        "                         whensent < NOW() - INTERVAL '4 weeks') AS a ".
+        "  GROUP BY category";
+    my $categorystats = dbh()->selectall_arrayref($query, { Slice => {} });
+    print $q->h2(_('Category fix rate for problems > 4 weeks old'));
+    print $q->start_table({border=>1, cellpadding=>2, cellspacing=>0});
+    print $q->Tr({}, $q->th({}, [_('Category'), _('Count'), _("Fixed")]));
+    map {
+        print $q->Tr({}, $q->td({}, [ $_->{category}, $_->{total},
+                                      $_->{fixedfraq} . '%' ]));
+    } sort { $b->{fixedfraq} <=> $a->{fixedfraq} } @{$categorystats};
+    print $q->end_table();
 
     print html_tail($q);
 }
@@ -891,13 +913,43 @@ sub admin_questionnaire {
     if ($total) {
         print $q->Tr({},
                      $q->td([
-                 sprintf("%d (%d%%)", $res{1}, (100 * $res{1}) / $total),
-                 sprintf("%d (%d%%)", $res{0}, (100 * $res{0}) / $total),
+                 sprintf("%d (%.1f%%)", $res{1}, (100 * $res{1}) / $total),
+                 sprintf("%d (%.1f%%)", $res{0}, (100 * $res{0}) / $total),
                             ]));
     } else {
         print $q->Tr({}, $q->td([ 'n/a', 'n/a' ]));
     }
     print $q->end_table();
+
+    print $q->p(_('Problem state change based on survey results'));
+
+    $survey = select_all("SELECT old_state, new_state, COUNT(*) FROM questionnaire WHERE whenanswered IS NOT NULL GROUP BY old_state, new_state");
+
+    $total = 0;
+    foreach my $h (@$survey) {
+        $total += $h->{count}
+    }
+
+    print $q->start_table({border=>1});
+    print $q->Tr({},
+                 $q->th({}, [_('Old state'),
+                             _('New state'),
+                             _('Count')]));
+    if ($total) {
+        foreach my $h (@$survey) {
+            print $q->Tr({},
+                         $q->td([
+                             $h->{old_state},
+                             $h->{new_state},
+                                 sprintf("%d (%.1f%%)", $h->{count},
+                                         100 * $h->{count} / $total),
+                            ]));
+        }
+    } else {
+        print $q->Tr({}, $q->td([ 'n/a', 'n/a', 'n/a' ]));
+    }
+    print $q->end_table();
+
     print html_tail($q);
 }
 

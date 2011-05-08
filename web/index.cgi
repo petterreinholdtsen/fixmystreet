@@ -137,18 +137,25 @@ sub front_page {
         if $q->{site} eq 'southampton';
     $out .= '<br><small>' . $subhead . '</small>' if $subhead ne ' ';
     $out .= '</p>';
-    #if (my $url = mySociety::Config::get('IPHONE_URL')) {
-    #    my $getiphone = _("Get FixMyStreet on your iPhone");
-    #    my $new = _("New!");
+    my %news =
+        (
+         '2011-04-23' => 'FiksGataMi sender n&aring; veisaker ogs&aring; til vegvesenet slik at kommuner ikke trenger sende saker videre.',
+         '2011-04-26' => $q->a({href => mySociety::Config::get('ANDROID_URL')},
+                               'Last ned FiksGataMi-app for din Android-telefon.'),
+        );
     #    if ($q->{site} eq 'fixmystreet') {
-    #        $out .= <<EOF
-#<p align="center" style="margin-bottom:0">
-#<img width="23" height="12" alt="$new" src="/i/new.png" border="0">
-#<a href="$url">$getiphone</a>
-#</p>
-#EOF
-    #    }
+#        $news{'2008-12-11'} = $q->a({href =>
+#                                        mySociety::Config::get('IPHONE_URL')},
+#                                   _("Get FixMyStreet on your iPhone"));
     #}
+    for my $date (sort {$b cmp $a} keys %news) {
+        my $new = _("New!");
+        my $text = $news{$date};
+    $out .= <<EOF;
+<p align="center" style="margin-bottom:0">
+<img width="23" height="12" alt="$new" src="/i/new.png" border="0">$date $text</p>
+EOF
+    }
     $out .= '<p class="error">' . $error . '</p>' if ($error);
 
     # Add pretty commas for display
@@ -186,6 +193,7 @@ EOF
     $out .= Cobrand::front_stats(Page::get_cobrand($q), $q);
 
     $out .= <<EOF;
+<p><a href="http://wiki.nuug.no/grupper/fiksgatami/tips">Tips til deg som har mottatt en sak fra FiksGataMi.</a></p>
 </div>
 
 EOF

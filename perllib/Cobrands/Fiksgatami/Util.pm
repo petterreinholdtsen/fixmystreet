@@ -51,7 +51,7 @@ sub geocoded_string_check {
 }
 
 sub area_types {
-    return ( 'NKO', 'NFY' );
+    return ( 'NKO', 'NFY', 'NRA' );
 }
 
 sub area_min_generation {
@@ -65,6 +65,15 @@ sub admin_base_url {
 sub writetothem_url {
     return 'http://www.norge.no/styresmakter/';
 }
+
+sub find_closest {
+    my ($self, $latitude, $longitude) = @_;
+    my $str = '';
+    $str .= FixMyStreet::Geocode::OSM::closest_road_text($latitude,
+                                                         $longitude);
+    return $str;
+}
+
 
 1;
 
