@@ -379,7 +379,7 @@ msgstr "Annet"
 #: perllib/Page.pm:559
 #, perl-format
 msgid "Reported by %s in the %s category anonymously at %s"
-msgstr "Rapportert av %s i kategorien %s anonnymt %s"
+msgstr "Rapportert av %s i kategorien %s anonymt %s"
 
 #: perllib/Page.pm:561
 #, perl-format
@@ -1228,8 +1228,8 @@ msgid ""
 "If this is not the correct location, simply click on the map again. "
 msgstr ""
 "Du har plassert problemet ved punktet i kartet som er markert med en lilla "
-"nål.  Hvis dette ikke er korrekt plassering kan du ganske enkelt klikke på "
-"kartet på nytt."
+"nål.  Hvis dette ikke er korrekt plassering kan du klikke i kartet på nytt "
+"for å sette en ny posisjon."
 
 #: web/index.cgi:672 web/index.cgi:697 web/index.cgi:699 web/index.cgi:712
 msgid " or "
@@ -1257,10 +1257,9 @@ msgid ""
 "name\n"
 "            if you give us permission."
 msgstr ""
-"All informasjonen du gir oss her vil bli sendt til <strong>%s</strong> eller "
-"en relevant lokal etat som TfL, via systemet London Report-It.\n"
-"Tittelen og detaljene for problemet vil bli offentlig, pluss ditt navn hvis "
-"du gir oss tillatelse."
+"All informasjonen du gir oss her (inkludert ditt navn9 vil bli sendt til <strong>%s</strong>.\n\n"
+"Tittelen og detaljene for problemet vil bli offentliggjort, inkludert ditt navn\n"
+"dersom du gir oss tillatelse."
 
 #: web/index.cgi:684
 #, perl-format
@@ -1269,21 +1268,21 @@ msgid ""
 "The subject and details of the problem will be public, plus your\n"
 "name if you give us permission."
 msgstr ""
-"All informasjonen du gir oss her vil bli sendt til <strong>%s</strong>.\n"
-"Tittelen og detaljene for problemet vil bli offentlig, pluss ditt navn\n"
-"hvis du gir oss tillatelse."
+"All informasjonen du gir oss her (inkludert navnet ditt) vil bli sendt til <strong>%s</strong>.\n"
+"Tittelen og detaljene for problemet vil bli offentliggjort her, inkludert ditt navn\n"
+"dersom du gir oss tillatelse."
 
 #: web/index.cgi:698
 msgid "All the information you provide here will be sent to"
-msgstr "All informasjonen du har lagt inn her vil bli sendt til"
+msgstr "All informasjonen du har lagt inn (inkludert navnet ditt) vil bli sendt til"
 
 #: web/index.cgi:701
 msgid ""
 "The subject and details of the problem will be public, plus your name if you "
 "give us permission."
 msgstr ""
-"Tittelen og detaljene for problemet vil bli offentlig, pluss navnet ditt\n"
-"hvis du gir oss tillatelse til det."
+"Tittelen og detaljene for problemet vil bli offentlig, inkludert navnet ditt\n"
+"dersom du gir oss tillatelse til det."
 
 #: web/index.cgi:703
 msgid ""
@@ -1402,11 +1401,11 @@ msgstr "(valgfritt)"
 
 #: web/index.cgi:773
 msgid "Can we show your name on the site?"
-msgstr "Kan vi vise ditt navn her på nettstedet?"
+msgstr "Ja, dere kan vise navnet mitt på nettstedet?"
 
 #: web/index.cgi:775
 msgid "Can we show your name publicly?"
-msgstr "Kan vi vise ditt navn offentlig?"
+msgstr "Ja, dere kan vise navnet mitt offentlig?"
 
 #: web/index.cgi:777
 msgid "(we never show your email address or phone number)"
@@ -3155,7 +3154,7 @@ msgstr ""
 "\n"
 "Epost: <?=$values['email']?>\n"
 "\n"
-"<?=$values['phone_line']?><?=$values['category_line']?>Tema: <?=$values"
+"<?=$values['phone_line']?><?=$values['category_line']?>Tittel: <?=$values"
 "['title']?>\n"
 "\n"
 "Detaljer: <?=$values['detail']?>\n"
@@ -3246,7 +3245,7 @@ msgstr ""
 "\n"
 "Epost: <?=$values['email']?>\n"
 "\n"
-"<?=$values['phone_line']?><?=$values['category_line']?>Tema: <?=$values"
+"<?=$values['phone_line']?><?=$values['category_line']?>Tittel: <?=$values"
 "['title']?>\n"
 "\n"
 "Detajer: <?=$values['detail']?>\n"
