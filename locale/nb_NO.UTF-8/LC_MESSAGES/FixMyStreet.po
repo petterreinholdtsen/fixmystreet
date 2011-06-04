@@ -379,7 +379,7 @@ msgstr "Annet"
 #: perllib/Page.pm:559
 #, perl-format
 msgid "Reported by %s in the %s category anonymously at %s"
-msgstr "Rapportert av %s i kategorien %s anonnymt %s"
+msgstr "Rapportert av %s i kategorien %s anonymt %s"
 
 #: perllib/Page.pm:561
 #, perl-format
@@ -1130,7 +1130,7 @@ msgid ""
 "wish your name to be shown on the site, untick the box"
 msgstr ""
 "Legg inn ditt fulle navn, administrasjoner som mottar saken trenger dette - "
-"hvis du ikke ønsker at ditt navn skal vises, kryss av her"
+"hvis du ikke ønsker at ditt navn skal vises, fjern haken under"
 
 #: web/index.cgi:323 web/index.cgi:587 web/index.cgi:603
 msgid "-- Pick a category --"
