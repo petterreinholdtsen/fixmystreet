@@ -7,13 +7,13 @@ på FiksGataMi:
 
 [% token_url %]
 
-Hvis ditt epost program ikke gir deg mulighet til å klikke på linken,
-kopier linken inn i nettleseren.
+Hvis du ikke kan klikke på lenken, kan du kopiere den til
+addressefeltet i din nettleser.
 
 Din sak hadde følgende tittel:
 [% report.title %]
 
-Med følgende verdier:
+Med følgende detaljer:
 [% report.detail %]
 
 Vennlig hilsen,  

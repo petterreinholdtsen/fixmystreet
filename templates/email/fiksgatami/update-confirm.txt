@@ -2,13 +2,12 @@ Subject: Bekreft din oppdatering på FiksGataMi
 
 Hei [% update.user.name %],
 
-Vennligst klikk på lenken under for å bekrefte oppdateringen du skrev
-nettopp:
+Vennligst klikk på lenken under for å bekrefte din oppdatering:
 
 [% token_url %]
 
-Hvis du ikke kan klikke på lenken, kopier og lim den inn
-i adressefeltet på din nettleser..
+Hvis ditt epostprogram ikke gir deg mulighet til å klikke på linken,
+kopier linken inn i nettleseren.
 
 Din oppdatering inneholder:
 
