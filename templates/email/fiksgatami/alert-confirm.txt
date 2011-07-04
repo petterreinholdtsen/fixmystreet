@@ -1,14 +1,14 @@
-Subject: Bekreft din sak på FiksGataMI.no
+Subject: Bekreft din varsling fra FiksGataMI.no
 
 Hei,
 
-Vennligst klikk på lenken under for å bekrefte varslet du
-har bedt om å abonnere på FiksGataMi:
+Vennligst klikk på lenken under for å bekrefte varslingen du
+har bedt om å abonnere på fra FiksGataMi:
 
     [% token_url %]
 
-Hvis du ikke kan klikke på lenken, kan du kopiere den i
-addressefeltet på dine nettleser.
+Hvis du ikke kan klikke på lenken, kan du kopiere den til
+addressefeltet i din nettleser.
 
-Vennlig Hilsen,  
+Vennlig hilsen,  
 FiksGataMi-gruppen

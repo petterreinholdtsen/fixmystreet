@@ -19,11 +19,11 @@ Epost: <?=$values['email']?>
 
 <?=$values['phone_line']?><?=$values['category_line']?>Tema: <?=$values['title']?>
 
-Detajer: <?=$values['detail']?>
+Detaljer: <?=$values['detail']?>
 
 <?=$values['easting_northing']?>Breddegrad: <?=$values['latitude']?>
 
-Lengegrad: <?=$values['longitude']?>
+Lengdegrad: <?=$values['longitude']?>
 
 <?=$values['closest_address']?>----------
 

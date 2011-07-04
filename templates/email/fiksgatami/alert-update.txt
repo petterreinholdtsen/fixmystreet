@@ -1,6 +1,6 @@
-Subject: Nye oppdateringer for problem - '<?=$values['title']?>'
+Subject: Nye oppdateringer for sak - '<?=$values['title']?>'
 
-Følgende oppdateringer har blitt lagt inn for dette problemet:
+Følgende oppdateringer har blitt lagt inn for denne saken:
 
 <?=$values['data']?>
 
@@ -14,5 +14,5 @@ Du kan ikke kontakte noen ved å svare på denne eposten.
 Vennlig hilsen,  
 Fiksgata-laget
 
-For å slutte å motta epost når det er nye oppdateringer om dettte
+For å slutte å motta epost når det er nye oppdateringer om dette
 problemet, følg denne lenken: <?=$values['unsubscribe_url']?>
