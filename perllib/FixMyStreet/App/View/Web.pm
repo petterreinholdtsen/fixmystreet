@@ -25,7 +25,9 @@ __PACKAGE__->config(
         escape_js => \&escape_js,
         html      => \&html_filter,
     },
-    COMPILE_EXT => '.ttc',
+# Disable the compile cache until we figure out where to store these
+# on fiksgatami.no
+#    COMPILE_EXT => '.ttc',
     STAT_TTL    => FixMyStreet->config('STAGING_SITE') ? 1 : 86400,
 );
 
