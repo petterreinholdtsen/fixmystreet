@@ -1,0 +1,69 @@
+// Generics
+
+$header_back: #ecf5fd;
+$header_back_lighter: #ecf5fd;
+$header_colour: #000;
+$header_darker: #000;
+
+$map_width: 420px;
+
+@import "../../../css/_main.scss";
+
+    #navigation {
+        margin-top: 125px;
+    }
+
+    h1#header {
+        font-size: 200%;
+        margin-bottom: 0em;
+    }
+
+    #logo {
+        top: 12.5em;
+    }
+
+    a {
+        color: #9C2161;
+    }
+
+    body {
+        font-family: Helvetica, Arial, sans-serif;
+        font-size: 13.5px;
+        color: black;
+    }
+
+#mysociety {
+
+    #map_box {
+        width: $map_width + 2;
+    }
+
+    #map {
+        width: $map_width;
+        height: $map_width;
+    }
+
+    dd {
+        margin-left: 40px;
+    }
+
+    div {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+    }
+
+    h3 {
+        font-size: 1.17em;
+        font-weight: bold;
+        margin: 1em 0em 1em 0em;
+    }
+
+    h2 {
+        font-weight: bold;
+        margin: 1em 0em 1em 0em;
+    }
+
+    ul, ol {
+        padding-left: 2em;
+    }
+}
