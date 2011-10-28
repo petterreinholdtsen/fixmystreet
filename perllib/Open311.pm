@@ -83,9 +83,14 @@ EOT
                 return $obj->{ request }->{ service_request_id };
             } else {
                 my $token = $obj->{ request }->{ token };
-                return $self->get_service_request_id_from_token( $token );
+                if ( $token ) {
+                    return $self->get_service_request_id_from_token( $token );
+                }
             }
         }
+
+        warn sprintf( "Failed to submit problem %s over Open311, response\n: %s", $problem->id, $response );
+        return 0;
     }
 }
 
