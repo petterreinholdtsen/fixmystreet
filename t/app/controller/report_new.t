@@ -1,6 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
+use utf8;
 
 use FixMyStreet::TestMech;
 use Web::Scraper;
@@ -374,9 +375,11 @@ foreach my $test (
       FixMyStreet::App->model('DB::User')->find( { email => $test_email } );
     ok $user, "user found";
     if ($test->{user}) {
+        is $user->name, 'Old Name', 'name unchanged';
         ok $user->check_password('old_password'), 'password unchanged';
     } else {
-        ok $user->check_password('secret'), 'password set correctly';
+        is $user->name, undef, 'name not yet set';
+        is $user->password, '', 'password not yet set for new user';
     }
 
     # find the report
@@ -405,10 +408,8 @@ foreach my $test (
 
     $mech->get_ok( '/report/' . $report->id );
 
-    if ($test->{user}) {
-        is $report->name, 'Joe Bloggs', 'name updated correctly';
-        ok $report->user->check_password('secret'), 'password updated correctly';
-    }
+    is $report->name, 'Joe Bloggs', 'name updated correctly';
+    ok $report->user->check_password('secret'), 'password updated correctly';
 
     # check that the reporter has an alert
     my $alert = FixMyStreet::App->model('DB::Alert')->find( {
@@ -565,7 +566,7 @@ foreach my $test (
         $mech->submit_form_ok(
             {
                 with_fields => {
-                    title         => "Test Report at caf\xc3\xa9",
+                    title         => "Test Report at café", 
                     detail        => 'Test report details.',
                     photo         => '',
                     name          => 'Joe Bloggs',
@@ -620,7 +621,7 @@ foreach my $test (
 
 }
 
-$contact2->category( "Pothol\xe9s" );
+$contact2->category( "Pothol\xc3\xa9s" );
 $contact2->update;
 $mech->get_ok( '/report/new/ajax?latitude=' . $saved_lat . '&longitude=' . $saved_lon );
 $mech->content_contains( "Pothol\xc3\xa9s" );
