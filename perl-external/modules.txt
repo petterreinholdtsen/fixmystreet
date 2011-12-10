@@ -27,6 +27,7 @@ DBIx::Class::Storage::DBI
 DateTime::Format::HTTP
 DateTime::Format::ISO8601
 DateTime::Format::Pg
+DateTime::Format::W3CDTF
 Email::Address
 Email::MIME
 Email::Send
@@ -34,6 +35,7 @@ Email::Simple
 Email::Valid
 File::Path
 HTML::Entities
+HTML::Form
 HTTP::Server::Simple
 HTTP::Server::Simple::CGI
 IO::String
